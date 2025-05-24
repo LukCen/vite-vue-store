@@ -1,0 +1,44 @@
+<script setup lang="ts">
+import { ref } from 'vue';
+import { fetchProducts } from '../ProductFetcher';
+import { Loader } from 'lucide-vue-next';
+
+const api = {
+  base: "https://dummyjson.com",
+  get products(){
+    return this.base + "/products"
+  },
+  get categories(){
+    return this.products + "/categories"
+  }
+}
+
+
+const product = await fetchProducts(api.products)
+async function fetchProductByIndex(index:number){
+  const productData:ProductCardData = {
+    id: product.products[index].id,
+    name: product.products[index].title,
+    price: product.products[index].price,
+    image: product.products[index].images[0] ?? "https://placehold.co/200x200/303030/FFFFFF/png?text=MISSING+PRODUCT+IMAGE",
+  }
+  return productData
+}
+
+const isLoaded = ref(false)
+
+const randomIndex = Math.floor(Math.random() * 30)
+
+const newProduct = await fetchProductByIndex(randomIndex)
+</script>
+<template>
+  <div v-bind:title="newProduct.name" class="card flex flex-col gap-4 p-4 h-full w-[200px] bg-white shadow-xl rounded-xl">
+    <img v-show="isLoaded===true" v-bind:src="newProduct.image" alt="" @load="isLoaded = true" height="150" width="150">
+    <Loader height="150" width="150" class="animate-spin" v-if="isLoaded === false" />
+    <div class="product-info flex flex-col gap-2">
+      <h3 class="line-clamp-2">{{ newProduct.name }}</h3>
+      <p class="font-bold">$ {{ newProduct.price }}</p>
+      <router-link :to="`/product/${newProduct.id}`">Sprawdź!</router-link>
+    </div>
+  </div>
+</template>
