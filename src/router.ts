@@ -5,6 +5,7 @@ import Error from "./pages/Error.vue";
 import UserPage from "./pages/UserPage.vue";
 import Basket from "./pages/Basket.vue";
 import About from "./pages/About.vue";
+import ProductList from "./pages/ProductList.vue";
 
 
 const routes = [
@@ -13,7 +14,8 @@ const routes = [
   { path: '/404', component: Error },
   { path: '/about', component: About },
   { path: '/profile', component: UserPage },
-  { path: '/basket', component: Basket }
+  { path: '/basket', component: Basket },
+  { path: '/productlist/:category', component: ProductList }
 ]
 
 export const router = createRouter({
