@@ -1,27 +1,20 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { fetchProducts } from '../ProductFetcher';
+// import { fetchProducts } from '../ProductFetcher';
 
 
-const api = {
-  base: "https://dummyjson.com",
-  get products(){
-    return this.base + "/products"
-  },
-  get categories(){
-    return this.products + "/categories"
-  },
-  get categoryProductList(){
-    return this.products + "/category"
-  }
-}
-
-const productsByCategory = await fetchProducts(api.categories)
-
-
-// const categoryNamesArray:string[] = [] //justa  helper object to keep stuff close, do I don't need to use endless dot notation
-
-// categories.forEach((e:Record<string, string>) => {categoryNamesArray.push(e.name)})
+// const api = {
+//   base: "https://dummyjson.com",
+//   get products(){
+//     return this.base + "/products"
+//   },
+//   get categories(){
+//     return this.products + "/categories"
+//   },
+//   get categoryProductList(){
+//     return this.products + "/category"
+//   }
+// }
 
 // oh god help me
 

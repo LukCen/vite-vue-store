@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
+// import { useRoute } from 'vue-router'
 import { fetchProducts } from '../ProductFetcher'
 
 
@@ -15,7 +15,7 @@ const api = {
   }
 }
 
-const route = useRoute()
+// const route = useRoute()
 
 const product = await fetchProducts(api.products)
 
