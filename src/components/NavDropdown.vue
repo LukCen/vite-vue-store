@@ -1,20 +1,20 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-// import { fetchProducts } from '../ProductFetcher';
+import { fetchProducts } from '../ProductFetcher';
 
 
-// const api = {
-//   base: "https://dummyjson.com",
-//   get products(){
-//     return this.base + "/products"
-//   },
-//   get categories(){
-//     return this.products + "/categories"
-//   },
-//   get categoryProductList(){
-//     return this.products + "/category"
-//   }
-// }
+const api = {
+  base: "https://dummyjson.com",
+  get products(){
+    return this.base + "/products"
+  },
+  get categories(){
+    return this.products + "/categories"
+  },
+  get categoryProductList(){
+    return this.products + "/category"
+  }
+}
 
 // oh god help me
 
@@ -39,6 +39,14 @@ const categoriesContainer: Record<string, string[]> = {
   ]
 }
 
+const apiCall = await fetchProducts(api.categories)
+// console.log(apiCall.find((e:Record<string,string>) => e.name === "Mens Shirts").slug)
+
+function fetchProductSlug(n:string){
+  if(apiCall){
+    return apiCall.find((e:Record<string, string>) => e.name === n)?.slug
+  }
+}
 
 // builds top menu from keys in object above
 const fetchedCategories = ref<string[]>([])
@@ -46,6 +54,7 @@ fetchedCategories.value.push(...Object.keys(categoriesContainer))
 
 const hoverIndex = ref<number | null>(null)
 
+console.log(fetchProductSlug("Womens Dresses"))
 </script>
 
 <template>
@@ -56,7 +65,7 @@ const hoverIndex = ref<number | null>(null)
      <ul class="flex flex-col w-full rounded-sm top-full absolute overflow-hidden">
       <!-- submenu - individual subcategories -->
       <li v-show="hoverIndex===index" v-for="(subitem) in categoriesContainer[item]" :key="subitem" class="flex w-full bg-slate-600 hover:bg-slate-800 text-slate-100 p-4 justify-center">
-        <router-link :to="`/productlist/${subitem}`">{{ subitem }}</router-link>
+        <router-link :to="`/productlist/${fetchProductSlug(subitem)}`">{{ subitem }}</router-link>
       </li>
      </ul>  
     </li>
