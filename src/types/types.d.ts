@@ -21,3 +21,13 @@ type ProductCardData = {
   price: number,
   image: string
 }
+
+type BasketData = {
+  basketContents: BasketDataItem[]
+}
+
+type BasketDataItem = {
+  name: string,
+  price: number,
+  quantity: number
+}

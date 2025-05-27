@@ -3,6 +3,8 @@ import { fetchProducts } from '../ProductFetcher';
 import { useRoute } from 'vue-router';
 import { ShoppingBasket, Loader, UserCircle2 } from 'lucide-vue-next';
 import { computed, ref } from 'vue';
+import { handleBasketData } from '../components/HandleBasketData';
+import Popup from '../components/Popup.vue';
 const api = {
   base: "https://dummyjson.com",
   get products(){
@@ -15,11 +17,38 @@ const productData = await fetchProducts(api.products + `/${productId}`)
 
 const isLoaded = ref(false)
 const itemAmount = ref(1)
-
+const timer = ref(0)
+const timerVisible = ref(false)
 const totalPrice = computed(() => productData.price * itemAmount.value)
+let timerInterval: ReturnType<typeof setInterval> | null = null
+function popupTimer() {
+  timer.value = 0
+  timerVisible.value = true
 
+  if (timerInterval) clearInterval(timerInterval)
+
+  timerInterval = setInterval(() => {
+    timer.value++
+    if (timer.value >= 5) {
+      timerVisible.value = false
+      clearInterval(timerInterval!)
+    }
+  }, 1000)
+}
 console.log(productData)
 console.log(productData.reviews[0].comment)
+
+const purchasedProduct:BasketDataItem = {
+  name: productData.name,
+  price:productData.price,
+  quantity: itemAmount.value
+}
+
+const basketTotal:BasketData = {
+  basketContents: [purchasedProduct]
+}
+
+
 </script>
 
 <template>
@@ -42,7 +71,7 @@ console.log(productData.reviews[0].comment)
             <option value="4">4</option>
             <option value="5">5</option>
            </select> 
-          <button class="add-to-basket flex gap-2 p-2 bg-blue-500 font-med text-white rounded-sm duration-200 hover:scale-105">
+          <button @click="handleBasketData(basketTotal), popupTimer()" class="add-to-basket flex gap-2 p-2 bg-blue-500 font-med text-white rounded-sm duration-200 hover:scale-105">
           <ShoppingBasket/>Add to basket
           </button>
         </div>
@@ -61,4 +90,5 @@ console.log(productData.reviews[0].comment)
       </ul>
     </section>
   </main>
+  <Popup v-if="timerVisible === true"/>
 </template>

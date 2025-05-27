@@ -2,6 +2,8 @@
 // import Card from '../components/Card.vue';
 import CardContainer from '../components/CardContainer.vue';
 import HeroBanner from '../components/HeroBanner.vue';
+
+
 </script>
 
 <template>
