@@ -22,11 +22,9 @@ type ProductCardData = {
   image: string
 }
 
-type BasketData = {
-  basketContents: BasketDataItem[]
-}
 
 type BasketDataItem = {
+  id: string,
   name: string,
   price: number,
   quantity: number

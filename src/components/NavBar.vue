@@ -3,7 +3,7 @@ import NavDropdown from './NavDropdown.vue'
 import NavUserSection from './NavUserSection.vue';
 
 </script>
-
+<!-- TODO - replace logo with something more permanent, fix the  -->
 <template>
   <nav class="flex max-h-[150px] gap-4">
     <router-link to="/">

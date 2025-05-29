@@ -29,7 +29,7 @@ function popupTimer() {
 
   timerInterval = setInterval(() => {
     timer.value++
-    if (timer.value >= 5) {
+    if (timer.value >= 3) {
       timerVisible.value = false
       clearInterval(timerInterval!)
     }
@@ -39,14 +39,12 @@ console.log(productData)
 console.log(productData.reviews[0].comment)
 
 const purchasedProduct:BasketDataItem = {
+  id: productData.id,
   name: productData.name,
   price:productData.price,
   quantity: itemAmount.value
 }
 
-const basketTotal:BasketData = {
-  basketContents: [purchasedProduct]
-}
 
 
 </script>
@@ -63,7 +61,7 @@ const basketTotal:BasketData = {
         <p>Unit price: ${{ productData.price }}</p>
         <p>Total price: ${{ totalPrice.toFixed(2) }}</p>
         <p>{{ productData.rating }} / 5</p>
-        <div class="product_info__button flex gap-4">
+        <div class="product_info__button flex gap-4 relative">
            <select v-model="itemAmount" class="flex border-2 border-black rounded-xl p-2 justify-center items-center" name="Select amount" id="item_quantity">
             <option value="1">1</option>
             <option value="2">2</option>
@@ -71,9 +69,10 @@ const basketTotal:BasketData = {
             <option value="4">4</option>
             <option value="5">5</option>
            </select> 
-          <button @click="handleBasketData(basketTotal), popupTimer()" class="add-to-basket flex gap-2 p-2 bg-blue-500 font-med text-white rounded-sm duration-200 hover:scale-105">
+          <button @click="handleBasketData(purchasedProduct), popupTimer()" class="add-to-basket flex gap-2 p-2 bg-blue-500 font-med text-white rounded-sm duration-200 hover:scale-105">
           <ShoppingBasket/>Add to basket
-          </button>
+        </button>
+        
         </div>
       </div>
     </section>
@@ -90,5 +89,5 @@ const basketTotal:BasketData = {
       </ul>
     </section>
   </main>
-  <Popup v-if="timerVisible === true"/>
+<Popup v-show="timerVisible"/>
 </template>
