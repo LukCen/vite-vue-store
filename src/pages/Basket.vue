@@ -3,9 +3,9 @@ import { ref } from 'vue';
 import {useRouter } from 'vue-router';
 import { HomeIcon } from 'lucide-vue-next';
 
-  const basketEmpty = ref(false)
+  const basketEmpty = ref(true)
   if(localStorage.length > 0){
-    basketEmpty.value === true
+    basketEmpty.value = false
   }
 
  function parseBasketData():Record<string, string>[]{
@@ -22,7 +22,20 @@ import { HomeIcon } from 'lucide-vue-next';
   return returnedData
  }
  const basketDataItems = parseBasketData()
-  console.log(basketDataItems)
+
+// data fetching for the basket contents
+
+const basketContentsData = await Promise.all(
+  basketDataItems.map(e => fetch(`https://dummyjson.com/products/${encodeURIComponent(e.id)}`).then(res=>res.json()))
+)
+
+function fetchParamsForBasketProduct(itemId:string | number){
+  const product = basketContentsData.find((i) => i.id === itemId)
+  return product
+}
+console.log(basketContentsData)
+
+  // console.log(basketDataItems)
   const route = useRouter()
 
   // console.dir(localStorage)
@@ -35,12 +48,15 @@ import { HomeIcon } from 'lucide-vue-next';
     </div>
 
     <div class="flex flex-col gap-4">
-      <div class="basket-content-container">
-        <ul v-for="(item) in basketDataItems" class="flex flex-col gap-4">
-          <li class="bg-white flex items-center gap-2 rounded-md shadow-xl">
-            <p>{{ item.id }}</p>
-            <p>{{ item.quantity }}</p>
-            <p>{{ item.price }}</p>
+      <div v-show="basketEmpty===false" class="basket-content-container">
+        <h2>Your basket currently holds: </h2>
+        <ul class="flex flex-col gap-4">
+          <li v-for="(item) in basketDataItems"  class="bg-white flex items-center gap-4 rounded-md shadow-xl">
+            <img class="max-w-[75px] max-h-[75px]" v-bind:src="fetchParamsForBasketProduct(item.id)?.images?.[0]" alt="">
+            <p class="flex flex-col gap-2">Name <br>{{ fetchParamsForBasketProduct(item.id)?.title }}</p>
+            <p class="flex flex-col gap-2">ID <br>{{ item.id }}</p>
+            <p class="flex flex-col gap-2">Quantity <br>{{ item.quantity }}</p>
+            <p class="flex flex-col gap-2">Price $<br>{{ (parseInt(item.price) * parseInt(item.quantity)).toFixed(2)  }}</p>
           </li>
 
         </ul>
