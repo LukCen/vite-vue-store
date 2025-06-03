@@ -4,7 +4,6 @@ import 'vueperslides/dist/vueperslides.css'
 
 
 
-// const categories:Product[] = fetchProducts(api.products)
 const slides = [
   {
     title: 'Laptops',
