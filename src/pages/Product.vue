@@ -1,16 +1,11 @@
 <script setup lang="ts">
-import { fetchProducts } from '../ProductFetcher';
+import { fetchProducts } from '../utils/ProductFetcher';
 import { useRoute } from 'vue-router';
 import { ShoppingBasket, Loader, UserCircle2 } from 'lucide-vue-next';
 import { computed, ref } from 'vue';
-import { handleBasketData } from '../components/HandleBasketData';
+import { api, handleBasketData } from '../utils/HandleBasketData';
 import Popup from '../components/Popup.vue';
-const api = {
-  base: "https://dummyjson.com",
-  get products(){
-    return this.base + "/products"
-  }
-}
+
 const route = useRoute()
 const productId = route.params.id
 const productData = await fetchProducts(api.products + `/${productId}`)
@@ -21,6 +16,10 @@ const timer = ref(0)
 const timerVisible = ref(false)
 const totalPrice = computed(() => productData.price * itemAmount.value)
 let timerInterval: ReturnType<typeof setInterval> | null = null
+
+/**
+ * Simple helper for showing a popup after adding a product to the basket.
+ */
 function popupTimer() {
   timer.value = 0
   timerVisible.value = true
@@ -35,8 +34,6 @@ function popupTimer() {
     }
   }, 1000)
 }
-console.log(productData)
-console.log(productData.reviews[0].comment)
 
 const purchasedProduct:BasketDataItem = {
   id: productData.id,

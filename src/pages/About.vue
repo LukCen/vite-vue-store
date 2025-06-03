@@ -19,6 +19,8 @@
         <li><a class="text-blue-500 hover:underline" href="https://lucide.dev/">Lucide Icons </a> - other icons </li>
         <li><a class="text-blue-500 hover:underline" href="https://dummyjson.com/docs/products">DummyJSON</a> - API endpoints</li>
         <li><a class="text-blue-500 hover:underline" href="https://placehold.co/">Placehold.co</a> - temporary placeholder images during dev</li>
+        <li><a class="text-blue-500 hover:underline" href="https://madewithvuejs.com/vueper-slides">Vueper Slides</a> - a nice pre-made slider component</li>
+
       </ul>
     </div>
   </main>

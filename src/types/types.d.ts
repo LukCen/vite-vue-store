@@ -29,3 +29,7 @@ type BasketDataItem = {
   price: number,
   quantity: number
 }
+
+
+declare module 'vueperslides'
+

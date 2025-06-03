@@ -5,9 +5,8 @@
 
       <li><router-link class="w-full block hover:underline text-center" to="/about">About</router-link></li>
       <li><a class="w-full block hover:underline text-center" href="#">Blog</a></li>
-      <li><a class="w-full block hover:underline text-center" href="#">Contact</a></li>
-      <li><a class="w-full block hover:underline text-center" href="#">Delivery</a></li>
+      <li><router-link to="/contact">Contact</router-link></li>
     </ul>
-    <span class="text-slate-100 text-[10px]">VueStore by Łukasz Cena</span>
+    <span class="text-slate-100 text-[10px]">Shopville by Łukasz Cena</span>
   </footer>
 </template>

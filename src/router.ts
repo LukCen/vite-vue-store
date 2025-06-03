@@ -6,6 +6,7 @@ import UserPage from "./pages/UserPage.vue";
 import Basket from "./pages/Basket.vue";
 import About from "./pages/About.vue";
 import ProductList from "./pages/ProductList.vue";
+import Contact from "./pages/Contact.vue";
 
 
 const routes = [
@@ -15,7 +16,8 @@ const routes = [
   { path: '/about', component: About },
   { path: '/profile', component: UserPage },
   { path: '/basket', component: Basket },
-  { path: '/productlist/:category', component: ProductList }
+  { path: '/productlist/:category', component: ProductList },
+  { path: '/contact', component: Contact }
 ]
 
 export const router = createRouter({

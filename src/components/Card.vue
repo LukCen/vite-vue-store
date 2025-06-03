@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { fetchProducts } from '../ProductFetcher';
+import { fetchProducts } from '../utils/ProductFetcher';
 import { Loader } from 'lucide-vue-next';
+import Btn from './Btn.vue';
 
 const api = {
   base: "https://dummyjson.com",
@@ -32,13 +33,13 @@ const randomIndex = Math.floor(Math.random() * 30)
 const newProduct = await fetchProductByIndex(randomIndex)
 </script>
 <template>
-  <div v-bind:title="newProduct.name" class="card flex flex-col gap-4 p-4 h-full w-[200px] bg-white shadow-xl rounded-xl">
+  <div v-bind:title="newProduct.name" class="card flex flex-col gap-4 p-4 w-[200px] bg-white shadow-xl rounded-xl">
     <img v-show="isLoaded===true" v-bind:src="newProduct.image" alt="" @load="isLoaded = true" height="150" width="150">
     <Loader height="150" width="150" class="animate-spin" v-if="isLoaded === false" />
     <div class="product-info flex flex-col gap-2">
       <h3 class="line-clamp-2">{{ newProduct.name }}</h3>
       <p class="font-bold">$ {{ newProduct.price }}</p>
-      <router-link :to="`/product/${newProduct.id}`">Sprawdź!</router-link>
+      <Btn as="link" :to="`/product/${newProduct.id}`" text="Sprawdź!"/>
     </div>
   </div>
 </template>

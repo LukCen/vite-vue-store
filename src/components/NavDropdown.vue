@@ -1,20 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { fetchProducts } from '../ProductFetcher';
+import { fetchProducts } from '../utils/ProductFetcher';
+import { api } from '../utils/HandleBasketData';
 
 
-const api = {
-  base: "https://dummyjson.com",
-  get products(){
-    return this.base + "/products"
-  },
-  get categories(){
-    return this.products + "/categories"
-  },
-  get categoryProductList(){
-    return this.products + "/category"
-  }
-}
 
 // oh god help me
 
@@ -40,7 +29,6 @@ const categoriesContainer: Record<string, string[]> = {
 }
 
 const apiCall = await fetchProducts(api.categories)
-// console.log(apiCall.find((e:Record<string,string>) => e.name === "Mens Shirts").slug)
 
 function fetchProductSlug(n:string){
   if(apiCall){
@@ -50,11 +38,11 @@ function fetchProductSlug(n:string){
 
 // builds top menu from keys in object above
 const fetchedCategories = ref<string[]>([])
+
 fetchedCategories.value.push(...Object.keys(categoriesContainer))
 
 const hoverIndex = ref<number | null>(null)
 
-console.log(fetchProductSlug("Womens Dresses"))
 </script>
 
 <template>
