@@ -4,7 +4,7 @@
 
 import { type PropType } from 'vue';
 
-  const props = defineProps({
+defineProps({
     /** 
      * @param {string} as - determines what HTML tag is created  :
      * - 'button' creates a normal button element, which also accepts all button-specific parameters (like 'type') - this is the default option if no parameters are passed
