@@ -1,5 +1,30 @@
-<script setup>
-import { Delete, LockOpenIcon, MoonIcon, RemoveFormatting, Trash2Icon, UserCircle2 } from 'lucide-vue-next';
+<script setup lang="ts">
+import {  LockOpenIcon, MoonIcon,  Trash2Icon, UserCircle2 } from 'lucide-vue-next';
+import { fetchTableData, isLoggedIn } from '../utils/db';
+import { onMounted } from 'vue';
+import { ref } from 'vue';
+
+
+const currentUser = await isLoggedIn().then(e => e)
+
+
+// cba with a better fix now, Supabase seems to always return this as a string anyway
+const createdAt = new Date(currentUser?.confirmed_at as string)
+console.log(currentUser?.email)
+const userCreatedAt = createdAt ? `${createdAt.getDate()}-${createdAt.getMonth()}-${createdAt.getFullYear()}` : "N/A"
+
+const currentUserUsername = ref('')
+onMounted(async () => {
+    const table_Users:_User[] | null = await fetchTableData('users', '*')
+    if(table_Users){
+     
+      // yes this is always going to be a string, username is a mandatory field in the table
+      // also this throws an error in the console, will fix later - conditional seems to do fine
+      currentUserUsername.value = table_Users.filter((e) => e.email === currentUser?.email)[0].username as string ?? null
+    }
+})
+console.log(createdAt)
+
 
 </script>
 <template>
@@ -9,22 +34,16 @@ import { Delete, LockOpenIcon, MoonIcon, RemoveFormatting, Trash2Icon, UserCircl
       <!-- Placeholder avatar -->
       <UserCircle2 color="#2b7fff" height="75" width="75"/>
       <div>
-        <h2 class="text-2xl font-semibold">John Doe</h2>
-        <p class="text-gray-500">jdoe@example.com</p>
-        <p class="text-sm text-gray-400">Joined: 12.02.2023</p>
+        <h2 class="text-2xl font-semibold">{{ currentUserUsername ? currentUserUsername : "Guest" }}</h2>
+        <p class="text-gray-500">{{ currentUser?.email }}</p>
+        <p class="text-sm text-gray-400">Joined: {{ userCreatedAt }}</p>
       </div>
     </section>
 
     <!-- Editable Info -->
     <section>
       <h3 class="text-xl font-medium mb-4">Dane konta</h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <input type="text" placeholder="First name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-        <input type="text" placeholder="Last name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-        <input type="email" placeholder="Email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-        <input type="tel" placeholder="Phone number" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" />
-      </div>
-      <button class="mt-4 px-4 py-2 bg-blue-500 hover:bg-blue-600 duration-150 text-white rounded-md">Save changes</button>
+<span class="text-center">This will contain some data once I get around to knowing what I even want to put in here</span>
     </section>
 
     <!-- Preferences -->
@@ -34,7 +53,7 @@ import { Delete, LockOpenIcon, MoonIcon, RemoveFormatting, Trash2Icon, UserCircl
         <!-- Placeholder for icon -->
          <MoonIcon/>
         <label class="flex items-center gap-2">
-          <input type="checkbox" /> Dark Mode
+          <input type="checkbox" /> Dark Mode - TO BE IMPLEMENTED
         </label>
       </div>
     </section>
@@ -42,14 +61,14 @@ import { Delete, LockOpenIcon, MoonIcon, RemoveFormatting, Trash2Icon, UserCircl
     <!-- Account Actions -->
     <section class="border-t pt-6">
       <h3 class="text-xl font-medium mb-4">Actions</h3>
-      <div class="space-y-2">
+      <div class=" flex gap-5">
         <button class="w-full px-4 py-2 bg-gray-100 rounded-md text-left flex items-center gap-2">
           <LockOpenIcon/>
-          Change password
+          Change password - TO BE IMPLEMENTED
         </button>
         <button class="w-full px-4 py-2 bg-red-600 text-white rounded-md flex items-center gap-2">
           <Trash2Icon/>
-          Delete account
+          Delete account - TO BE IMPLEMENTED
         </button>
       </div>
     </section>

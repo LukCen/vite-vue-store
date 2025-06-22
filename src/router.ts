@@ -7,6 +7,7 @@ import Basket from "./pages/Basket.vue";
 import About from "./pages/About.vue";
 import ProductList from "./pages/ProductList.vue";
 import Contact from "./pages/Contact.vue";
+import LoginForm from "./components/LoginForm.vue";
 
 
 const routes = [
@@ -17,7 +18,8 @@ const routes = [
   { path: '/profile', component: UserPage },
   { path: '/basket', component: Basket },
   { path: '/productlist/:category', component: ProductList },
-  { path: '/contact', component: Contact }
+  { path: '/contact', component: Contact },
+  { path: '/login', component: LoginForm }
 ]
 
 export const router = createRouter({

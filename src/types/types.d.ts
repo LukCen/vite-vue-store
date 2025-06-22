@@ -30,6 +30,11 @@ type BasketDataItem = {
   quantity: number
 }
 
+type _User = {
+  username: string | null,
+  email: string | null,
+  password: string | null,
+}
 
 declare module 'vueperslides'
 

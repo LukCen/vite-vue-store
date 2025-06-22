@@ -14,7 +14,9 @@ import { HomeIcon } from 'lucide-vue-next';
     if(localStorage){
       const key = localStorage.key(i)
       const value = key ? localStorage.getItem(key) : null // 
-      if(value){
+      // PATCH JOB - FIX LATER
+      const correctKeyFormat = /^\d{1,9}$/;
+      if(value && correctKeyFormat.test(key as string)){
         returnedData.push(JSON.parse(value))
       }
     }
@@ -31,14 +33,15 @@ const basketContentsData = await Promise.all(
 
 function fetchParamsForBasketProduct(itemId:string | number){
   const product = basketContentsData.find((i) => i.id === itemId)
-  return product
+  if(product){
+    return product
+  }
 }
 console.log(basketContentsData)
 
-  // console.log(basketDataItems)
   const route = useRouter()
 
-  // console.dir(localStorage)
+
 </script>
 <template>
   <main class="flex flex-col gap-4">

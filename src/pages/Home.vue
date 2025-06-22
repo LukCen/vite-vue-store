@@ -8,7 +8,7 @@ import HeroBanner from '../components/HeroBanner.vue';
 </script>
 
 <template>
-  <main class="bg-gray-200 text-gray-900 max-h-fit w-screen gap-8 p-5">
+  <main class="gap-4 py-4">
     <HeroBanner/>
     <Suspense>
       <CardContainer id="hotspot_1"/>
