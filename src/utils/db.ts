@@ -1,4 +1,5 @@
 import { createClient, type User } from "@supabase/supabase-js";
+import { router } from "../router";
 
 const url: string = import.meta.env.VITE_SUPABASE_URL ?? '';
 const key: string = import.meta.env.VITE_SUPABASE_KEY ?? '';
@@ -34,6 +35,7 @@ export async function addUser(d: _User) {
 export async function loginUser(d: _User) {
   const { email, password } = d
   const result = await supabase.auth.signInWithPassword({ email: email ?? '', password: password ?? '' })
+
   return result
 }
 
@@ -41,13 +43,13 @@ export async function fetchTableData<T>(table: string, row: string) {
   const { data, error } = await supabase.from(table).select(row)
 
   if (error || !data) {
-    console.error('shits broken')
+    console.error(`Error fetching data from table ${table} : ${error}`)
     return null
   }
   return data as T[]
 }
 
-// runs on mount from NavUserSection to determine if component version for logged in is generated
+// runs on mount from NavUserSection to determine if component version for logged in is generated (puts username in the innerText instead of a generic 'My Profile' or whatever)
 export async function isLoggedIn(): Promise<User | null> {
   const { data, error } = await supabase.auth.getUser()
   if (error || !data?.user) {
@@ -55,5 +57,14 @@ export async function isLoggedIn(): Promise<User | null> {
     return null
   } {
     return data.user
+  }
+}
+
+// this one doesn't take a user as an argument, because only one can be logged in at a time
+export async function logoutUser() {
+  let { error } = await supabase.auth.signOut()
+  router.go(0)
+  if (error) {
+    console.error(`Error logging out: ${error}`)
   }
 }

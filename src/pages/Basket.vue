@@ -37,7 +37,7 @@ function fetchParamsForBasketProduct(itemId:string | number){
     return product
   }
 }
-console.log(basketContentsData)
+
 
   const route = useRouter()
 

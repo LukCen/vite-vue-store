@@ -10,20 +10,19 @@ const currentUser = await isLoggedIn().then(e => e)
 
 // cba with a better fix now, Supabase seems to always return this as a string anyway
 const createdAt = new Date(currentUser?.confirmed_at as string)
-console.log(currentUser?.email)
+
 const userCreatedAt = createdAt ? `${createdAt.getDate()}-${createdAt.getMonth()}-${createdAt.getFullYear()}` : "N/A"
 
 const currentUserUsername = ref('')
 onMounted(async () => {
     const table_Users:_User[] | null = await fetchTableData('users', '*')
     if(table_Users){
-     
       // yes this is always going to be a string, username is a mandatory field in the table
       // also this throws an error in the console, will fix later - conditional seems to do fine
-      currentUserUsername.value = table_Users.filter((e) => e.email === currentUser?.email)[0].username as string ?? null
+      currentUserUsername.value = table_Users?.filter((e) => e.email === currentUser?.email)[0].username as string ?? null
     }
 })
-console.log(createdAt)
+
 
 
 </script>

@@ -31,11 +31,11 @@ async function handleNewUser() {
 
 async function handleLogin(){
    const table_Users:_User[] | null = await fetchTableData('users', '*')
-    console.log(table_Users)
+
     if(table_Users){
       // this will be solved with a dedicated ES6 class for managing database queries - this here is a quick and dirty 'please just work for now'
       const loginUserEmail = table_Users.find((e) => e.username === log_username.value)?.email
-      console.log(loginUserEmail)
+
       loginEmail.value = loginUserEmail ?? ""
     }
   try {
@@ -45,9 +45,11 @@ async function handleLogin(){
       password: log_password.value
     }
 
-    console.log(currentUser)
+
     await loginUser(currentUser)
+      router.go(0)
   }
+
   catch (e){
     console.error('Error logging in - ' + e)
   }
