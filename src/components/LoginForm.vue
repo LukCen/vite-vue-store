@@ -47,12 +47,12 @@ async function handleLogin(){
 
 
     await loginUser(currentUser)
-      this.$router.go(0)
   }
-
+  
   catch (e){
     console.error('Error logging in - ' + e)
   }
+  location.reload()
 }
 
 </script>
