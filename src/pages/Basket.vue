@@ -3,24 +3,18 @@ import { ref } from 'vue';
 import {useRouter } from 'vue-router';
 import { HomeIcon } from 'lucide-vue-next';
 
+import { useStore } from '../store/store';
+const route = useRouter()
+const store = useStore()
+// console.log(store.getTotalItems)
+
   const basketEmpty = ref(true)
-  if(localStorage.length > 0){
+  if(store.getTotalItems > 0){
     basketEmpty.value = false
   }
 
- function parseBasketData():Record<string, string>[]{
-  const returnedData:Record<string,string>[] = []
-  for(let i = 0; i < localStorage.length; i++){
-    if(localStorage){
-      const key = localStorage.key(i)
-      const value = key ? localStorage.getItem(key) : null // 
-      // PATCH JOB - FIX LATER
-      const correctKeyFormat = /^\d{1,9}$/;
-      if(value && correctKeyFormat.test(key as string)){
-        returnedData.push(JSON.parse(value))
-      }
-    }
-  }
+ function parseBasketData(){
+  const returnedData:BasketDataItem[] = store.getAllItems
   return returnedData
  }
  const basketDataItems = parseBasketData()
@@ -37,9 +31,6 @@ function fetchParamsForBasketProduct(itemId:string | number){
     return product
   }
 }
-
-
-  const route = useRouter()
 
 
 </script>
@@ -59,7 +50,7 @@ function fetchParamsForBasketProduct(itemId:string | number){
             <p class="flex flex-col gap-2">Name <br>{{ fetchParamsForBasketProduct(item.id)?.title }}</p>
             <p class="flex flex-col gap-2">ID <br>{{ item.id }}</p>
             <p class="flex flex-col gap-2">Quantity <br>{{ item.quantity }}</p>
-            <p class="flex flex-col gap-2">Price $<br>{{ (parseInt(item.price) * parseInt(item.quantity)).toFixed(2)  }}</p>
+            <p class="flex flex-col gap-2">Price $<br>{{ (item.price * item.quantity).toFixed(2)  }}</p>
           </li>
 
         </ul>
