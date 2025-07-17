@@ -3,7 +3,7 @@ import { fetchProducts } from '../utils/ProductFetcher';
 import { useRoute } from 'vue-router';
 import { ShoppingBasket, Loader, UserCircle2 } from 'lucide-vue-next';
 import { computed, ref } from 'vue';
-import { api} from '../utils/HandleBasketData';
+import { api } from '../utils/HandleBasketData';
 import Popup from '../components/Popup.vue';
 
 import { useStore } from '../store/store';
@@ -68,9 +68,6 @@ const purchasedProduct:BasketDataItem = {
             <option value="4">4</option>
             <option value="5">5</option>
            </select> 
-          <!-- <button @click="handleBasketData(purchasedProduct), popupTimer()" class="add-to-basket flex gap-2 p-2 bg-blue-500 font-med text-white rounded-sm duration-200 hover:scale-105">
-          <ShoppingBasket/>Add to basket
-          </button> -->
            <button @click="store.addItem(purchasedProduct), popupTimer()" class="add-to-basket flex gap-2 p-2 bg-blue-500 font-med text-white rounded-sm duration-200 hover:scale-105">
           <ShoppingBasket/>Add to basket
           </button>

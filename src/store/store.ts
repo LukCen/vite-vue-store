@@ -1,5 +1,4 @@
-import { createPinia } from "pinia";
-import { defineStore } from "pinia";
+import { createPinia, defineStore } from "pinia";
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
 // initialize the store
@@ -39,8 +38,11 @@ export const useStore = defineStore('basket', {
     addItem(item: BasketDataItem): void {
       this.items.push(item);
     },
-    removeItem(index: number): void {
-      this.items.splice(index, 1);
+    removeItem(id: number | string): void {
+      const itemToRemove = this.items.find((e) => e.id === id) ?? null
+      if (itemToRemove) {
+        this.items.splice(this.items.indexOf(itemToRemove), 1)
+      }
     }
   }
 })

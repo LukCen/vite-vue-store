@@ -2,9 +2,12 @@
   import { ShoppingCart, User2 } from 'lucide-vue-next';
   import { onMounted, ref } from 'vue';
   import { fetchTableData, isLoggedIn, logoutUser } from '../utils/db';
+import { useStore } from '../store/store';
   const accountClicked = ref(false)
   const ref_isLoggedIn = ref(false)
   const menuUsername = ref('')
+  const store = useStore()
+
   onMounted(async () => {
     const table_Users:_User[] | null = await fetchTableData('users', '*')
     const user = await isLoggedIn()
@@ -39,6 +42,7 @@
       class="flex flex-1/2 h-full justify-center items-center text-nowrap font-medium gap-1 bg-blue-500 hover:bg-blue-600 hover:rounded-none duration-150 text-white px-4 py-2 rounded-xl"
       to="/basket">
       <ShoppingCart />Cart
+      <span v-if="store.getTotalItems > 0" class="bg-white rounded-full w-[20px] h-[20px] text-blue-500 flex items-center justify-center">{{ store.getTotalItems }}</span>
     </router-link>
   </div>
 </template>

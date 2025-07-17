@@ -1,6 +1,6 @@
 # Vue Store Project
 
-This is a mini project made using Vue + Vite. 
+This is a mini project made using Vue + Vite, for the purpose of learning these technologies.
 
 Current features 
 
@@ -10,6 +10,7 @@ Current features
 - basic basket mockup
 - Supabase integration - registration, authentication and connection to a custom table, also super basic login
 - user profile page - partially done, need to populate it with some more data
+- Pinia-based state management (currently only for basket)
 
 
 TODO:
@@ -17,7 +18,7 @@ TODO:
 - user profile page - make it make sense
 - register/login - add some UI and visual feedback, so users know is happening
 - sensible, consistent layout and color scheme - want something with blue as primary color this time
-- include Pinia for a better-made basket management 
+- ~~include Pinia for a better-made basket management~~
 - replace placeholder images with more permanent ones
 - finish up all minor pages, like contact
 - properly design and test RWD
