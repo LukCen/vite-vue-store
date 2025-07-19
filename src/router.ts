@@ -7,7 +7,7 @@ import Basket from "./pages/Basket.vue";
 import About from "./pages/About.vue";
 import ProductList from "./pages/ProductList.vue";
 import Contact from "./pages/Contact.vue";
-import LoginForm from "./components/LoginForm.vue";
+import LoginForm from "./account/LoginForm.vue";
 
 
 const routes = [

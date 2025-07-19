@@ -4,16 +4,13 @@ import {addUser, fetchTableData, loginUser} from '../utils/db.ts'
 
 const log_username = ref('')
 const log_password = ref('')
-
 const loginEmail = ref('')
-
 
 const registeredUser = reactive({
   username: '',
   email: '',
   password: '',
 })
-
 
 async function handleNewUser() {
   try {
@@ -31,11 +28,9 @@ async function handleNewUser() {
 
 async function handleLogin(){
    const table_Users:_User[] | null = await fetchTableData('users', '*')
-
     if(table_Users){
-      // this will be solved with a dedicated ES6 class for managing database queries - this here is a quick and dirty 'please just work for now'
+      // a bit awkward but Supabase registration explicitly wants only an email, so I needed to query a custom table and match username from there
       const loginUserEmail = table_Users.find((e) => e.username === log_username.value)?.email
-
       loginEmail.value = loginUserEmail ?? ""
     }
   try {
@@ -44,11 +39,8 @@ async function handleLogin(){
       email: loginEmail.value,
       password: log_password.value
     }
-
-
     await loginUser(currentUser)
   }
-  
   catch (e){
     console.error('Error logging in - ' + e)
   }

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { fetchProducts } from '../utils/ProductFetcher';
-import { api } from '../utils/HandleBasketData';
+import { fetchProducts } from '../../utils/ProductFetcher';
+import { api } from '../../utils/HandleBasketData';
 
 
 

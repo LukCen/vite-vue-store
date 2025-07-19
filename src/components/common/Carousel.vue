@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// todo - will probably replace with my own solution at some point
 import { VueperSlides, VueperSlide } from 'vueperslides'
 import 'vueperslides/dist/vueperslides.css'
 

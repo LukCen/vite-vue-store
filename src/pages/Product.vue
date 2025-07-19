@@ -4,7 +4,7 @@ import { useRoute } from 'vue-router';
 import { ShoppingBasket, Loader, UserCircle2 } from 'lucide-vue-next';
 import { computed, ref } from 'vue';
 import { api } from '../utils/HandleBasketData';
-import Popup from '../components/Popup.vue';
+import ItemAddedPopup from '../components/products/ItemAddedPopup.vue';
 
 import { useStore } from '../store/store';
 
@@ -88,5 +88,5 @@ const purchasedProduct:BasketDataItem = {
       </ul>
     </section>
   </main>
-<Popup v-show="timerVisible"/>
+<ItemAddedPopup v-show="timerVisible"/>
 </template>

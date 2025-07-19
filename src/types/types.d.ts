@@ -29,7 +29,9 @@ type BasketDataItem = {
   price: number,
   quantity: number
 }
-
+/**
+ * Custom-made type for marking user data - underscore added to differentiate it from Supabase type.
+ */
 type _User = {
   username: string | null,
   email: string | null,

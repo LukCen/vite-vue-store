@@ -1,8 +1,8 @@
 <script setup lang="ts">
   import { ShoppingCart, User2 } from 'lucide-vue-next';
   import { onMounted, ref } from 'vue';
-  import { fetchTableData, isLoggedIn, logoutUser } from '../utils/db';
-import { useStore } from '../store/store';
+  import { fetchTableData, isLoggedIn, logoutUser } from '../../utils/db';
+  import { useStore } from '../../store/store';
   const accountClicked = ref(false)
   const ref_isLoggedIn = ref(false)
   const menuUsername = ref('')

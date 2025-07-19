@@ -1,9 +1,9 @@
 <script setup lang="ts">
 // import Card from '../components/Card.vue';
 
-import CardContainer from '../components/CardContainer.vue';
-import Carousel from '../components/Carousel.vue';
-import HeroBanner from '../components/HeroBanner.vue';
+import Carousel from '../components/common/Carousel.vue';
+import HeroBanner from '../components/common/HeroBanner.vue';
+import ProductCardContainer from '../components/products/ProductCardContainer.vue';
 
 </script>
 
@@ -11,7 +11,7 @@ import HeroBanner from '../components/HeroBanner.vue';
   <main class="gap-4 py-4">
     <HeroBanner/>
     <Suspense>
-      <CardContainer id="hotspot_1"/>
+      <ProductCardContainer id="hotspot_1"/>
     </Suspense>
     <Carousel/>
   </main>

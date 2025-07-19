@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { fetchProducts } from '../utils/ProductFetcher';
+import { fetchProducts } from '../../utils/ProductFetcher';
 import { Loader } from 'lucide-vue-next';
-import Btn from './Btn.vue';
+// import Btn from './Btn.vue';
 
 const api = {
   base: "https://dummyjson.com",
@@ -39,7 +39,7 @@ const newProduct = await fetchProductByIndex(randomIndex)
     <div class="product-info flex flex-col gap-2">
       <h3 class="line-clamp-2">{{ newProduct.name }}</h3>
       <p class="font-bold">$ {{ newProduct.price }}</p>
-      <Btn class="bg-blue-500 hover:bg-blue-600 duration-150 text-white flex justify-center px-4 py-2 w-fit rounded-xl mx-auto my-0" as="link" :to="`/product/${newProduct.id}`" text="See more"/>
+      <router-link class="bg-blue-500 hover:bg-blue-600 duration-150 text-white flex justify-center px-4 py-2 w-fit rounded-xl mx-auto my-0" as="link" :to="`/product/${newProduct.id}`" text="See more"/>
     </div>
   </div>
 </template>
