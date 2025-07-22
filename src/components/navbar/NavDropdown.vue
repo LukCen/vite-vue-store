@@ -46,13 +46,28 @@ const hoverIndex = ref<number | null>(null)
 </script>
 
 <template>
-  <ul class="flex gap-5 flex-5/6">
+  <!-- desktop -->
+  <ul class="menu_desktop hidden desktop:flex gap-5 flex-5/6">
     <!-- menu dropdown - main categories -->
-    <li v-for="(item, index) in fetchedCategories" :key="item" @mouseover="hoverIndex = index" @mouseleave="hoverIndex = null" class="flex min-w-[150px] px-4 w-fit duration-150 text-white font-medium relative">
+    <li v-for="(item, index) in fetchedCategories" :key="item" @mouseover="hoverIndex = index" @mouseleave="hoverIndex = null" class="flex min-w-[150px] px-4 w-fit duration-150 text-white font-semibold relative">
      <a class="flex items-center justify-center w-full h-full" href="/">{{ item.charAt(0).toUpperCase() + item.slice(1) }}</a>
      <ul class="flex flex-col w-full top-full left-0 absolute overflow-hidden shadow-2xl">
       <!-- submenu - individual subcategories -->
       <li v-show="hoverIndex===index" v-for="(subitem) in categoriesContainer[item]" :key="subitem" class="subitem flex w-full bg-blue-500 hover:bg-blue-600 text-white p-4 justify-center cursor-pointer">
+        <router-link :to="`/productlist/${fetchProductSlug(subitem)}`">{{ subitem }}</router-link>
+      </li>
+     </ul>  
+    </li>
+  </ul>
+
+  <!-- mobile -->
+    <ul class="menu_mobile flex desktop:hidden w-full flex-col gap-5 flex-5/6">
+    <!-- menu dropdown - main categories -->
+    <li v-for="(item, index) in fetchedCategories" :key="item" @mouseover="hoverIndex = index" @mouseleave="hoverIndex = null" class="product_cat flex flex-col min-w-[150px] px-4 w-full duration-150 text-white font-semibold relative">
+     <a class="flex items-center justify-center w-full h-full" href="/">{{ item.charAt(0).toUpperCase() + item.slice(1) }}</a>
+     <ul class="product_subcat flex flex-col w-full top-full gap-2 left-0 overflow-hidden shadow-2xl">
+      <!-- submenu - individual subcategories -->
+      <li v-for="(subitem) in categoriesContainer[item]" :key="subitem" class="subitem flex w-full bg-blue-500 hover:bg-blue-600 text-white p-2 font-normal justify-center cursor-pointer">
         <router-link :to="`/productlist/${fetchProductSlug(subitem)}`">{{ subitem }}</router-link>
       </li>
      </ul>  

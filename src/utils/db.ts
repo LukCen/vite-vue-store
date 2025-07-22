@@ -38,7 +38,7 @@ export async function loginUser(d: _User) {
 
   return result
 }
-
+// Fetches data from custom-made tables
 export async function fetchTableData<T>(table: string, row: string) {
   const { data, error } = await supabase.from(table).select(row)
 
