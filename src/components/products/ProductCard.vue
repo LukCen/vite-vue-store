@@ -33,7 +33,7 @@ const randomIndex = Math.floor(Math.random() * 30)
 const newProduct = await fetchProductByIndex(randomIndex)
 </script>
 <template>
-  <div v-bind:title="newProduct.name" class="card flex flex-col gap-4 p-4 desktop:w-[200px] w-full bg-white shadow-xl rounded-xl">
+  <div v-bind:title="newProduct.name" class="card flex flex-col gap-4 p-4 desktop:w-[200px] desktop:min-w-auto min-w-2/5 bg-white shadow-xl rounded-xl">
     <img v-show="isLoaded===true" v-bind:src="newProduct.image" alt="" @load="isLoaded = true" height="150" width="150">
     <Loader height="150" width="150" class="animate-spin" v-if="isLoaded === false" />
     <div class="product-info flex flex-col gap-2">

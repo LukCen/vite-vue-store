@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { MenuIcon } from 'lucide-vue-next';
+import {  MenuIcon, XIcon } from 'lucide-vue-next';
 import NavDropdown from './NavDropdown.vue'
 import NavUserSection from './NavUserSection.vue';
 import MobileNavBar from './MobileNavBar.vue';
@@ -19,7 +19,6 @@ function menuMobileToggle(){
     canToggle=true
   }, 150)
 }
-
 
 </script>
 <!-- TODO - replace logo with something more permanent, fix the  -->
@@ -46,7 +45,8 @@ function menuMobileToggle(){
     </div>
     <div class="right-side-container relative flex flex-col w-fit px-8 justify-center items-center bg-blue-800">
       <button @click="menuMobileToggle">
-        <MenuIcon color="#fff"/>
+        <MenuIcon v-show="!menuMobileOpen" color="#fff"/>
+        <XIcon v-show="menuMobileOpen" color="#fff"/>
       </button>
     </div>
     <MobileNavBar v-show="menuMobileOpen"/>

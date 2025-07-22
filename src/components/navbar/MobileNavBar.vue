@@ -13,7 +13,7 @@ import NavUserSection from './NavUserSection.vue';
 
 <style scoped>
 aside {
-  --padding: 16px; /*px-4 in tailwind */
+  --padding: 16px; /*p-4 in tailwind */
   transform: translateY(60px + var(--padding))
 }
 </style>

@@ -17,7 +17,6 @@ function startAutoRotation(){
     currentIndex.value = (currentIndex.value + 1) % props.images.length
   }, 5000)
   console.log('rotating')
-
 }
 
 function stopAutoRotation(){
