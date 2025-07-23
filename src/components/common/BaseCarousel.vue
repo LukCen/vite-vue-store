@@ -40,6 +40,9 @@ onBeforeUnmount(() => {
   stopAutoRotation()
 })
 </script>
+<script lang="ts">
+console.log(new URL('./', import.meta.url).href);
+</script>
 
 <template>
   <div class="carousel relative overflow-hidden w-full">
