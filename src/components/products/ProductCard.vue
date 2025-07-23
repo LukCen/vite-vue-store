@@ -16,6 +16,7 @@ const api = {
 
 
 const product = await fetchProducts(api.products)
+
 async function fetchProductByIndex(index:number){
   const productData:ProductCardData = {
     id: product.products[index].id,

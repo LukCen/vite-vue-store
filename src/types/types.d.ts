@@ -38,5 +38,14 @@ type _User = {
   password: string | null,
 }
 
-declare module 'vueperslides'
+type CarouselItem = {
+  src: Record<string, string> = {
+  desktop: string,
+  mobile: string
+  },
+  alt?: string,
+  header: string,
+  text: string,
+  url: string
+}
 
